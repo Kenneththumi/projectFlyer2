@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('page');
 });
 Route::get('form', function(){
     return view('form');
@@ -27,3 +27,5 @@ Route::get('delete/{id}','UsersController@destroy');
 Route::post('update/{id}','UsersController@update');
 
 Route::get('edit/{id}','UsersController@edit');
+
+Route::resource('flyers','flyersController@create');
