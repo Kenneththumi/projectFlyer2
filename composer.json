@@ -27,8 +27,14 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
-        ]
+        ],
+        "files":[
+               "app/helper.php"
+          ]
+
     },
+
+
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""

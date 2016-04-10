@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8"></meta>
     <title>First Form</title>
-    <link href="css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/libs.css" rel="stylesheet">
+
     <style>
     </style>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -31,7 +34,10 @@
    <div class="container">
        @yield('content')
    </div>
+ <script src="/js/libs.js">
 
+ </script>
+@include('flash')
 </body>
 </html>
 

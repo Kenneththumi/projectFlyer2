@@ -28,4 +28,6 @@ Route::post('update/{id}','UsersController@update');
 
 Route::get('edit/{id}','UsersController@edit');
 
-Route::resource('flyers','flyersController@create');
+Route::get('flyers','flyersController@create');
+
+Route::post('flyers1','flyersController@store');

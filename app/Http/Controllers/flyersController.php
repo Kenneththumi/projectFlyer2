@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Flyer;
 use App\Http\Controllers\Utilities\Country;
-use Illuminate\Http\Request;
+use Illuminate\Http\Requests;
 
-use App\Http\Requests;
+use App\Http\Requests\FlyerRequest;
 use App\Http\Controllers\Controller;
-
 
 class flyersController extends Controller
 {
@@ -18,7 +18,7 @@ class flyersController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -28,6 +28,7 @@ class flyersController extends Controller
      */
     public function create()
     {
+        flash("Hello World","This is the message");
         return view('flyersCreate');
     }
 
@@ -37,9 +38,13 @@ class flyersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FlyerRequest $request)
     {
-        //
+        Flyer::create($request->all());
+
+        flash("Success!", "Your flyer has been created.");
+
+        return redirect()->back();
     }
 
     /**
@@ -71,7 +76,7 @@ class flyersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FlyerRequest $request, $id)
     {
         //
     }

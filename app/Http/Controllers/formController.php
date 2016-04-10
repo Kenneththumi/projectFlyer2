@@ -48,7 +48,7 @@ class formController extends Controller
      */
     public function show($id)
     {
-        //
+        //$this->validate();
     }
 
     /**
