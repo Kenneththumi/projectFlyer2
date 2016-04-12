@@ -1,11 +1,11 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"></meta>
     <title>First Form</title>
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/libs.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" rel="stylesheet">
     <style>
     </style>
 </head>
@@ -37,6 +37,7 @@
  <script src="/js/libs.js">
 
  </script>
+ @yield('scripts.footer')
 @include('flash')
 </body>
 </html>

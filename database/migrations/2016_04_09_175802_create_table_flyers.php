@@ -19,7 +19,7 @@ class CreateTableFlyers extends Migration
             $table->string('zip',10);
             $table->string('state', 40);
             $table->string('country',40);
-            $table->string('price');
+            $table->integer('price');
             $table->text('description');
             $table->timestamps();
         });

@@ -3,90 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Flyer;
+use App\Photo;
+use App\UploadedFile;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Utilities\Country;
 use Illuminate\Http\Requests;
+
 
 use App\Http\Requests\FlyerRequest;
 use App\Http\Controllers\Controller;
 
-class flyersController extends Controller
+class  flyersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct(){
+
+         $this->middleware('auth');
+    }
+
+
     public function index()
     {
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        flash("Hello World","This is the message");
+        flash()->overlay("Welcome Aboard", "Thank you for signing up.");
+
         return view('flyersCreate');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(FlyerRequest $request)
     {
         Flyer::create($request->all());
 
-        flash("Success!", "Your flyer has been created.");
+        //flash("Success!", "Your flyer has been created.");
+
+        flash()->success('Success!', 'Your flyer has been created.');
 
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show($zip, $street)
     {
-        //
+
+        $flyer = Flyer::locatedAt($zip, $street);
+        //return Flyer::where(compact('zip','street'))->first();
+        /*$flyer=Flyer::where(compact('zip','street'))->first();*/
+        return view('show', compact('flyer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function addPhoto(Request $request, $zip, $street)
+    {
+         $this->validate($request, [
+            'photo' => 'required|mimes:jpg, jpeg, png, bmp, png'
+        ]);
+
+        //dd($request->all());
+        $photo= Photo::fromForm($request->file('photo'));
+
+        Flyer::locatedAt($zip, $street)->addPhoto($photo);
+
+
+
+        return 'Done';
+    }
+
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(FlyerRequest $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
